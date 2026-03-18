@@ -1,16 +1,8 @@
 import Link from 'next/link';
-import Image from 'next/image';
 import { SiteFooter } from './components/site-footer';
 import { SiteHeader } from './components/site-header';
 import { SiteImage } from './components/site-image';
-
-const scrollingImages = [
-  { src: '/images/coverphoto.jpg', alt: 'Wedding couple portrait.' },
-  { src: '/images/videoframe_0.png', alt: 'Wedding trailer frame.' },
-  { src: '/images/coverphoto.jpg', alt: 'Ceremony detail photograph.' },
-  { src: '/images/videoframe_0.png', alt: 'Reception moment frame.' },
-  { src: '/images/coverphoto.jpg', alt: 'Wedding day candid shot.' },
-] as const;
+import { ScrollGallery } from './components/scroll-gallery';
 
 // Homepage composition with hero, showcase, and ethos sections.
 export default function HomePage() {
@@ -22,7 +14,7 @@ export default function HomePage() {
         {/* Website trailer */}
         <section className="website-trailer">
           <video
-            src="/images/websitetrailer.mov"
+            src="/images/wideaf.mov"
             poster="/images/videoframe_0.png"
             autoPlay
             muted
@@ -69,24 +61,7 @@ export default function HomePage() {
           </article>
         </section>
 
-        {/* Scrolling image gallery */}
-        <section className="scroll-gallery" aria-label="Scrolling image gallery">
-          <div className="scroll-gallery-window">
-            <div className="scroll-gallery-track">
-              {[...scrollingImages, ...scrollingImages].map((image, index) => (
-                <figure className="scroll-gallery-item" key={`${image.src}-${index}`}>
-                  <Image
-                    src={image.src}
-                    alt={image.alt}
-                    fill
-                    sizes="(max-width: 720px) 70vw, 320px"
-                    className="object-cover"
-                  />
-                </figure>
-              ))}
-            </div>
-          </div>
-        </section>
+        <ScrollGallery />
 
         {/* Shared footer */}
         <SiteFooter />

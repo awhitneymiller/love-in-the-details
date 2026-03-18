@@ -159,15 +159,15 @@
     width: min(1040px, calc(100% - 3.6rem));
     margin: 1.25rem auto 0;
     background: #000000;
+    aspect-ratio: 21 / 9;
     overflow: hidden;
   }
 
   .website-trailer video {
     display: block;
     width: 100%;
-    height: auto;
-    max-height: min(68vh, 640px);
-    object-fit: contain;
+    height: 100%;
+    object-fit: cover;
   }
 
   .hero-headline {
@@ -239,11 +239,20 @@
 
   .company-ethos {
     width: min(1040px, calc(100% - 3.6rem));
+    margin-inline: auto;
     margin: 2.4rem auto 0;
   }
 
   .company-ethos .story-large-image {
     min-height: clamp(24rem, 40vw, 34rem);
+    padding: 0;
+    background: transparent;
+  }
+
+  .company-ethos .story-large-image-frame {
+    background: transparent;
+    border: 0;
+    box-shadow: none;
   }
 
   .company-ethos .story-large-image-frame > img {
@@ -260,19 +269,22 @@
   .scroll-gallery-window {
     overflow: hidden;
     padding: 0 1.8rem;
+    width: 100%;
   }
 
   .scroll-gallery-track {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    align-items: stretch;
     gap: 0.7rem;
-    width: max-content;
-    animation: scroll-gallery 34s linear infinite;
+    width: 100%;
   }
 
   .scroll-gallery-item {
     margin: 0;
     position: relative;
-    width: clamp(180px, 22vw, 320px);
+    width: 100%;
+    height: auto;
     aspect-ratio: 4 / 5;
     overflow: hidden;
     border: 1px solid rgba(221, 214, 202, 0.9);
@@ -330,17 +342,17 @@
     position: relative;
     min-height: 26rem;
     overflow: hidden;
-    background: rgba(255, 255, 255, 0.4);
-    padding: 0.75rem;
+    background: transparent;
+    padding: 0;
   }
 
   .story-large-image-frame {
     position: relative;
     height: 100%;
     overflow: hidden;
-    background: #ffffff;
-    border: 1px solid rgba(221, 214, 202, 0.9);
-    box-shadow: 0 10px 22px rgba(129, 116, 95, 0.14);
+    background: transparent;
+    border: 0;
+    box-shadow: none;
   }
 
   .section-block {
@@ -716,7 +728,7 @@
 
   .story-large-image {
     min-height: 18rem;
-    padding: 50px;
+    padding: 0;
   }
 
   .scroll-gallery-window {
@@ -774,14 +786,12 @@
 
   .website-trailer {
     width: min(1040px, calc(100% - 1.7rem));
+    aspect-ratio: 21 / 9;
   }
 
   .company-ethos {
     width: min(1040px, calc(100% - 1.7rem));
-  }
-
-  .website-trailer video {
-    max-height: min(52vh, 400px);
+    margin-inline: auto;
   }
 
   .packages-hero {
@@ -808,8 +818,9 @@
     padding-inline: 0.85rem;
   }
 
-  .scroll-gallery-item {
-    width: min(62vw, 260px);
+  .scroll-gallery-track {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0.55rem;
   }
 
   .strip-grid,
