@@ -29,7 +29,7 @@ export default function ContactPage() {
             <input className="field" placeholder="Last Name" />
             <input className="field field-wide" placeholder="Email" />
             <input className="field field-wide" placeholder="Phone Number" />
-            <textarea className="field field-wide" placeholder="Message us" rows={5} />
+            <textarea className="field field-wide" placeholder="Message" rows={5} />
             <button type="button" className="send-btn">
               Submit
             </button>
