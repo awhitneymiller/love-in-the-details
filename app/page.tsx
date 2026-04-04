@@ -1,7 +1,7 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import { SiteFooter } from './components/site-footer';
 import { SiteHeader } from './components/site-header';
-import { SiteImage } from './components/site-image';
 import { ScrollGallery } from './components/scroll-gallery';
 
 // Homepage composition with hero, showcase, and ethos sections.
@@ -44,7 +44,13 @@ export default function HomePage() {
         <section className="story-pair company-ethos">
           <div className="story-large-image">
             <div className="story-large-image-frame">
-              <img src="/images/companyethosimg.JPG" alt="image of founders"></img>
+              <Image
+                src="/images/companyethosimg.JPG"
+                alt="image of founders"
+                fill
+                sizes="(max-width: 720px) 100vw, 520px"
+                className="story-large-image-frame-img"
+              />
             </div>
           </div>
           <article className="story-copy">
@@ -62,7 +68,6 @@ export default function HomePage() {
         </section>
 
         <ScrollGallery />
-
         {/* Shared footer */}
         <SiteFooter />
       </div>

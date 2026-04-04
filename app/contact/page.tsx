@@ -20,7 +20,7 @@ export default function ContactPage() {
           <div>
             <p className="muted-copy">
               Interested in working together? Fill out some info and
-              we'll be in touch shortly. We can't wait to hear from you!
+              we&apos;ll be in touch shortly. We can&apos;t wait to hear from you!
             </p>
           </div>
 

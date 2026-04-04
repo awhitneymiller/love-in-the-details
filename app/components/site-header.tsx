@@ -6,9 +6,9 @@ import { useEffect, useState } from 'react';
 
 // Navigation labels for the header.
 const links = [
-  { href: '/packages', href404: '/404', label: 'Packages' },
+  { href: '/packages', href404: '/packages', label: 'Packages' },
   { href: '/film', href404: '/404', label: 'Film' },
-  { href: '/blog', href404: '/404', label: 'Blog' },
+  { href: '/blog', href404: '/blog', label: 'Blog' },
 ] as const;
 
 // Global site header with active-link and scroll state styling.
