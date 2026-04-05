@@ -3,7 +3,6 @@ import { notFound } from 'next/navigation';
 import { SiteFooter } from '../../components/site-footer';
 import { SiteHeader } from '../../components/site-header';
 import {
-  fetchBloggerBlog,
   fetchBloggerPosts,
   formatBlogDate,
   getBlogPostSlug,
@@ -17,12 +16,7 @@ export default async function BlogPostPage({
 }: {
   params: { slug: string };
 }) {
-  const blog = await fetchBloggerBlog();
-  if (!blog) {
-    notFound();
-  }
-
-  const posts = await fetchBloggerPosts(blog.id, 100);
+  const posts = await fetchBloggerPosts(100);
   const post = posts.find((entry) => {
     const slug = getBlogPostSlug(entry.url) || entry.id;
     return slug === params.slug;

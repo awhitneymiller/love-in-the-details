@@ -3,7 +3,6 @@ import Link from 'next/link';
 import { SiteFooter } from '../components/site-footer';
 import { SiteHeader } from '../components/site-header';
 import {
-  fetchBloggerBlog,
   fetchBloggerPosts,
   formatBlogDate,
   getBlogPostSlug,
@@ -14,8 +13,7 @@ export const revalidate = 300;
 
 // Journal landing page that lists recent Blogger posts.
 export default async function BlogPage() {
-  const blog = await fetchBloggerBlog();
-  const posts = blog ? await fetchBloggerPosts(blog.id, 12) : [];
+  const posts = await fetchBloggerPosts(12);
 
   return (
     <main id="content" className="site-page">

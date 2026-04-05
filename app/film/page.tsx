@@ -63,30 +63,10 @@ export default function FilmPage() {
       <div className="site-shell">
         <SiteHeader />
 
-        {/* Lead hero for the film collection. */}
-        <section className="film-hero" data-reveal="soft">
-          <div className="film-hero-media">
-            <Image
-              src="/images/coverphoto.jpg"
-              alt="Romantic wedding portrait"
-              fill
-              priority
-              sizes="(max-width: 800px) 100vw, 1100px"
-              className="film-hero-image"
-            />
-            <div className="film-hero-wash" />
-          </div>
-
-          <div className="film-hero-copy">
-            <p className="page-kicker">Wedding Films</p>
-            <h1 className="page-title">A gallery of films and moving details.</h1>
-          </div>
-        </section>
 
         {/* YouTube gallery. */}
         <section className="film-strip-head" data-reveal="up">
           <p className="film-strip-kicker">Featured Films</p>
-          <h2>Click through to watch on YouTube.</h2>
         </section>
 
         <section className="film-gallery" aria-label="Featured wedding films">
@@ -129,7 +109,6 @@ export default function FilmPage() {
         {/* Instagram card grid. */}
         <section className="film-strip-head film-strip-head-secondary" data-reveal="up">
           <p className="film-strip-kicker">Instagram</p>
-          <h2>Posts and reels.</h2>
         </section>
 
         <section className="film-social-grid" aria-label="Instagram posts and reels">

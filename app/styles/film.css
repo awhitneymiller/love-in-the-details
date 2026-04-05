@@ -1,58 +1,30 @@
 @layer components {
-  /* Film page uses a hero plus two media galleries. */
+  /* Film page uses an editorial intro plus two media galleries. */
   .film-page {
     width: 100%;
   }
 
-  .film-hero {
-    width: min(1180px, calc(100vw - 2rem));
-    margin: 1.5rem auto 0;
-    display: grid;
-    grid-template-columns: 1.2fr 0.8fr;
-    min-height: min(480px, 56vw);
-    border: 1px solid var(--line);
-    background: transparent;
-    overflow: hidden;
-    border-radius: 18px;
+  .film-page-hero {
+    padding-bottom: 1.2rem;
   }
 
-  .film-hero-media {
-    position: relative;
-    min-height: 100%;
+  .film-page-hero .page-title {
+    max-width: 12ch;
   }
 
-  .film-hero-image {
-    object-fit: cover;
-    object-position: center;
-  }
-
-  .film-hero-wash {
-    position: absolute;
-    inset: 0;
-    background:
-      linear-gradient(90deg, rgba(32, 38, 41, 0.08) 0%, rgba(32, 38, 41, 0.02) 46%, rgba(32, 38, 41, 0.22) 100%);
-  }
-
-  .film-hero-copy {
-    padding: clamp(1.6rem, 4vw, 3.4rem);
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    background: color-mix(in srgb, var(--shore-mist-100) 56%, var(--dune-100) 44%);
-  }
-
-  .film-hero-copy .page-title {
-    color: var(--accent-deep);
-    max-width: 9ch;
+  .film-page-hero .page-subtitle {
+    max-width: 50ch;
   }
 
   .film-strip-head {
     width: min(1180px, calc(100vw - 2rem));
-    margin: 1.8rem auto 0.85rem;
+    margin: 1.3rem auto 0.95rem;
+    display: grid;
+    gap: 0.3rem;
   }
 
   .film-strip-head-secondary {
-    margin-top: 2.2rem;
+    margin-top: 2.5rem;
   }
 
   .film-strip-kicker {
@@ -66,7 +38,7 @@
   }
 
   .film-strip-head h2 {
-    margin: 0.45rem 0 0;
+    margin: 0;
     font-size: clamp(1.65rem, 3.8vw, 2.7rem);
     font-family: var(--font-display), "Iowan Old Style", "Palatino Linotype", Palatino,
       "Book Antiqua", "Times New Roman", serif;
@@ -131,7 +103,7 @@
 
   .film-gallery-copy,
   .film-social-copy {
-    padding: 0.8rem 0.15rem 0;
+    padding: 0.95rem 0.15rem 0;
   }
 
   .film-gallery-label,
@@ -155,6 +127,7 @@
     color: var(--accent-deep);
     line-height: 1.18;
     letter-spacing: 0.02em;
+    text-wrap: balance;
   }
 
   .film-social-grid {
@@ -173,14 +146,6 @@
 }
 
 @media (max-width: 980px) {
-  .film-hero {
-    grid-template-columns: 1fr;
-  }
-
-  .film-hero-media {
-    min-height: 22rem;
-  }
-
   .film-gallery {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -191,22 +156,11 @@
 }
 
 @media (max-width: 720px) {
-  .film-hero,
+  .film-page-hero,
+  .film-strip-head,
   .film-gallery,
   .film-social-grid {
     width: min(1180px, calc(100vw - 1rem));
-  }
-
-  .film-hero {
-    margin-top: 0.85rem;
-  }
-
-  .film-hero-media {
-    min-height: 18rem;
-  }
-
-  .film-hero-copy .page-title {
-    max-width: 14ch;
   }
 
   .film-gallery,
@@ -216,7 +170,8 @@
 }
 
 @media (min-width: 1280px) {
-  .film-hero,
+  .film-page-hero,
+  .film-strip-head,
   .film-gallery,
   .film-social-grid {
     width: min(1280px, calc(100vw - 4rem));
@@ -224,15 +179,10 @@
 }
 
 @media (min-width: 1600px) {
-  .film-hero,
+  .film-page-hero,
+  .film-strip-head,
   .film-gallery,
   .film-social-grid {
     width: min(1380px, calc(100vw - 8rem));
-  }
-}
-
-@media (max-width: 480px) {
-  .film-hero-copy {
-    padding: 1rem;
   }
 }
