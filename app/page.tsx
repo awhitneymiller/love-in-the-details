@@ -4,15 +4,15 @@ import { SiteFooter } from './components/site-footer';
 import { SiteHeader } from './components/site-header';
 import { ScrollGallery } from './components/scroll-gallery';
 
-// Homepage composition with hero, showcase, and ethos sections.
+// Homepage composition with the trailer, ethos section, and image gallery.
 export default function HomePage() {
   return (
     <main id="content" className="site-page">
       <div className="site-shell">
         <SiteHeader />
 
-        {/* Website trailer */}
-        <section className="website-trailer">
+        {/* Website trailer. */}
+        <section className="website-trailer" data-reveal="soft">
           <video
             src="/images/websitetrailer.mov"
             poster="/images/videoframe_0.png"
@@ -25,35 +25,20 @@ export default function HomePage() {
           </video>
         </section>
 
-        {/* Hero collage 
-        <section className="home-hero-grid">
-          <div className="hero-image-slot">
-            <SiteImage alt="Lorem ipsum dolor sit amet." priority />
-          </div>
-          <div className="hero-image-slot">
-            <SiteImage alt="Lorem ipsum dolor sit amet." priority />
-          </div>
-          <div className="hero-image-slot">
-            <SiteImage alt="Lorem ipsum dolor sit amet." priority />
-          </div>
-        </section>
-          */}
-
-
-        {/* Company Ethos */}
+        {/* Brand ethos and founder portrait. */}
         <section className="story-pair company-ethos">
-          <div className="story-large-image">
+          <div className="story-large-image" data-reveal="left">
             <div className="story-large-image-frame">
               <Image
                 src="/images/companyethosimg.JPG"
-                alt="image of founders"
+                alt="Love in the Details founders"
                 fill
                 sizes="(max-width: 720px) 100vw, 520px"
                 className="story-large-image-frame-img"
               />
             </div>
           </div>
-          <article className="story-copy">
+          <article className="story-copy" data-reveal="right" data-reveal-delay="1">
             <h2>Company Ethos</h2>
             <p>
               Our commitment to crafting unforgettable wedding experiences
@@ -61,14 +46,16 @@ export default function HomePage() {
               to detail. Let us turn your dreams into an enchanting reality that will
               leave a lasting impression.
             </p>
-            <Link href="/404" className="soft-cta">
+            <Link href="/packages" className="soft-cta">
               Learn More
             </Link>
           </article>
         </section>
 
+        {/* Closing image gallery. */}
         <ScrollGallery />
-        {/* Shared footer */}
+
+        {/* Shared footer. */}
         <SiteFooter />
       </div>
     </main>

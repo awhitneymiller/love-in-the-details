@@ -4,37 +4,45 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
-// Navigation labels for the header.
+// Shared navigation labels rendered in both desktop and mobile menus.
 const links = [
-  { href: '/packages', href404: '/packages', label: 'Packages' },
-  { href: '/film', href404: '/404', label: 'Film' },
-  { href: '/blog', href404: '/blog', label: 'Blog' },
+  { href: '/packages', label: 'Packages' },
+  { href: '/film', label: 'Film' },
+  { href: '/blog', label: 'Blog' },
 ] as const;
 
-// Global site header with active-link and scroll state styling.
+// Matches nested routes without catching unrelated paths.
+const isPathActive = (pathname: string, href: string) =>
+  pathname === href || pathname.startsWith(`${href}/`);
+
+// Global site header with desktop navigation and a collapsible mobile menu.
 export function SiteHeader() {
   const pathname = usePathname();
-  const [isScrolled, setIsScrolled] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  // Toggles scrolled style after a small scroll threshold.
+  // Closes the mobile menu once the full desktop header fits again.
   useEffect(() => {
-    const onScroll = () => setIsScrolled(window.scrollY > 24);
-    onScroll();
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
+    const onResize = () => {
+      if (window.innerWidth > 820) {
+        setIsMenuOpen(false);
+      }
+    };
+
+    window.addEventListener('resize', onResize);
+    return () => window.removeEventListener('resize', onResize);
   }, []);
 
   return (
-    <header className={`site-header ${isScrolled ? 'is-scrolled' : ''}`}>
+    <header className="site-header" data-reveal="down">
       <div className="site-header-inner">
-        {/* Left navigation links */}
-        <nav className="site-nav" aria-label="Lorem ipsum dolor">
+        {/* Primary desktop navigation. */}
+        <nav className="site-nav" aria-label="Primary navigation">
           {links.map((link) => {
-            const isActive = pathname.startsWith(link.href);
+            const isActive = isPathActive(pathname, link.href);
             return (
               <Link
                 key={link.href}
-                href={link.href404}
+                href={link.href}
                 className={`site-nav-link ${isActive ? 'active' : ''}`}
               >
                 {link.label}
@@ -43,15 +51,15 @@ export function SiteHeader() {
           })}
         </nav>
 
-        {/* Center brand title */}
+        {/* Center brand lockup. */}
         <Link href="/" className="site-brand">
           Love in the Details
           <span className="site-brand-subtitle">CINEMATIC WEDDING FILMS</span>
         </Link>
 
-        {/* Right social dots and CTA */}
+        {/* Right-side contact link and mobile menu toggle. */}
         <div className="site-header-right">
-          <div className="site-header-social" aria-label="Lorem ipsum social">
+          <div className="site-header-social" aria-hidden="true">
             <span className="social-dot" />
             <span className="social-dot" />
             <span className="social-dot" />
@@ -59,11 +67,53 @@ export function SiteHeader() {
 
           <Link
             href="/contact"
-            className={`site-cta ${pathname.startsWith('/contact') ? 'active' : ''}`}
+            className={`site-nav-link site-header-contact ${isPathActive(pathname, '/contact') ? 'active' : ''}`}
           >
             Contact Us
           </Link>
+
+          <button
+            type="button"
+            className={`site-menu-toggle ${isMenuOpen ? 'active' : ''}`}
+            aria-expanded={isMenuOpen}
+            aria-controls="mobile-site-menu"
+            aria-label={isMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
+            onClick={() => setIsMenuOpen((open) => !open)}
+          >
+            <span />
+            <span />
+            <span />
+          </button>
         </div>
+      </div>
+
+      <div
+        id="mobile-site-menu"
+        className={`site-mobile-menu ${isMenuOpen ? 'open' : ''}`}
+      >
+        <nav className="site-mobile-menu-links" aria-label="Mobile navigation">
+          {links.map((link) => {
+            const isActive = isPathActive(pathname, link.href);
+            return (
+              <Link
+                key={link.href}
+                href={link.href}
+                className={`site-mobile-menu-link ${isActive ? 'active' : ''}`}
+                onClick={() => setIsMenuOpen(false)}
+              >
+                {link.label}
+              </Link>
+            );
+          })}
+
+          <Link
+            href="/contact"
+            className={`site-mobile-menu-link ${isPathActive(pathname, '/contact') ? 'active' : ''}`}
+            onClick={() => setIsMenuOpen(false)}
+          >
+            Contact Us
+          </Link>
+        </nav>
       </div>
     </header>
   );

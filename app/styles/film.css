@@ -1,0 +1,238 @@
+@layer components {
+  /* Film page uses a hero plus two media galleries. */
+  .film-page {
+    width: 100%;
+  }
+
+  .film-hero {
+    width: min(1180px, calc(100vw - 2rem));
+    margin: 1.5rem auto 0;
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    min-height: min(480px, 56vw);
+    border: 1px solid var(--line);
+    background: transparent;
+    overflow: hidden;
+    border-radius: 18px;
+  }
+
+  .film-hero-media {
+    position: relative;
+    min-height: 100%;
+  }
+
+  .film-hero-image {
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .film-hero-wash {
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(90deg, rgba(32, 38, 41, 0.08) 0%, rgba(32, 38, 41, 0.02) 46%, rgba(32, 38, 41, 0.22) 100%);
+  }
+
+  .film-hero-copy {
+    padding: clamp(1.6rem, 4vw, 3.4rem);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    background: color-mix(in srgb, var(--shore-mist-100) 56%, var(--dune-100) 44%);
+  }
+
+  .film-hero-copy .page-title {
+    color: var(--accent-deep);
+    max-width: 9ch;
+  }
+
+  .film-strip-head {
+    width: min(1180px, calc(100vw - 2rem));
+    margin: 1.8rem auto 0.85rem;
+  }
+
+  .film-strip-head-secondary {
+    margin-top: 2.2rem;
+  }
+
+  .film-strip-kicker {
+    margin: 0;
+    color: color-mix(in srgb, var(--dune-500) 72%, var(--rose-cloud-500) 28%);
+    font-size: 0.74rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-family: var(--font-body), "Avenir Next", Avenir, "Helvetica Neue", sans-serif;
+    font-weight: 400;
+  }
+
+  .film-strip-head h2 {
+    margin: 0.45rem 0 0;
+    font-size: clamp(1.65rem, 3.8vw, 2.7rem);
+    font-family: var(--font-display), "Iowan Old Style", "Palatino Linotype", Palatino,
+      "Book Antiqua", "Times New Roman", serif;
+    font-weight: 400;
+    color: var(--accent-deep);
+    line-height: 1.14;
+    letter-spacing: 0.02em;
+  }
+
+  .film-gallery {
+    width: min(1180px, calc(100vw - 2rem));
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1rem;
+  }
+
+  .film-gallery-card,
+  .film-social-card {
+    background: transparent;
+  }
+
+  .film-gallery-link,
+  .film-social-link {
+    display: block;
+    height: 100%;
+  }
+
+  .film-gallery-image-wrap,
+  .film-social-image-wrap {
+    position: relative;
+    aspect-ratio: 4 / 5.1;
+    overflow: hidden;
+    background: color-mix(in srgb, var(--shore-mist-200) 72%, var(--dune-100) 28%);
+    border-radius: 18px;
+  }
+
+  .film-gallery-image,
+  .film-social-image {
+    object-fit: cover;
+    transition:
+      transform 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+      filter 0.4s ease;
+  }
+
+  .film-gallery-badge {
+    position: absolute;
+    left: 1rem;
+    bottom: 1rem;
+    padding: 0.5rem 0.8rem;
+    border-radius: 0.5rem;
+    border: 1px solid rgba(248, 245, 236, 0.65);
+    background: rgba(68, 54, 45, 0.42);
+    color: var(--soft-fawn-50);
+    font-size: 0.66rem;
+    font-family: var(--font-body), "Avenir Next", Avenir, "Helvetica Neue", sans-serif;
+    font-weight: 400;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    backdrop-filter: blur(4px);
+  }
+
+  .film-gallery-copy,
+  .film-social-copy {
+    padding: 0.8rem 0.15rem 0;
+  }
+
+  .film-gallery-label,
+  .film-social-label {
+    margin: 0;
+    color: color-mix(in srgb, var(--dune-500) 72%, var(--rose-cloud-500) 28%);
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-family: var(--font-body), "Avenir Next", Avenir, "Helvetica Neue", sans-serif;
+    font-weight: 400;
+  }
+
+  .film-gallery-copy h3,
+  .film-social-copy h3 {
+    margin: 0.35rem 0 0;
+    font-size: 1.1rem;
+    font-family: var(--font-display), "Iowan Old Style", "Palatino Linotype", Palatino,
+      "Book Antiqua", "Times New Roman", serif;
+    font-weight: 400;
+    color: var(--accent-deep);
+    line-height: 1.18;
+    letter-spacing: 0.02em;
+  }
+
+  .film-social-grid {
+    width: min(1180px, calc(100vw - 2rem));
+    margin: 0 auto 2.75rem;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+  }
+
+  .film-gallery-link:hover .film-gallery-image,
+  .film-social-link:hover .film-social-image {
+    transform: scale(1.04);
+    filter: saturate(0.95) contrast(1.02);
+  }
+}
+
+@media (max-width: 980px) {
+  .film-hero {
+    grid-template-columns: 1fr;
+  }
+
+  .film-hero-media {
+    min-height: 22rem;
+  }
+
+  .film-gallery {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .film-social-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 720px) {
+  .film-hero,
+  .film-gallery,
+  .film-social-grid {
+    width: min(1180px, calc(100vw - 1rem));
+  }
+
+  .film-hero {
+    margin-top: 0.85rem;
+  }
+
+  .film-hero-media {
+    min-height: 18rem;
+  }
+
+  .film-hero-copy .page-title {
+    max-width: 14ch;
+  }
+
+  .film-gallery,
+  .film-social-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (min-width: 1280px) {
+  .film-hero,
+  .film-gallery,
+  .film-social-grid {
+    width: min(1280px, calc(100vw - 4rem));
+  }
+}
+
+@media (min-width: 1600px) {
+  .film-hero,
+  .film-gallery,
+  .film-social-grid {
+    width: min(1380px, calc(100vw - 8rem));
+  }
+}
+
+@media (max-width: 480px) {
+  .film-hero-copy {
+    padding: 1rem;
+  }
+}

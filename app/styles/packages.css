@@ -1,0 +1,333 @@
+@layer components {
+  /* Packages page swaps imagery and pricing content from one shared data source. */
+  .packages-page {
+    width: 100%;
+  }
+
+  .packages-hero {
+    width: min(1180px, calc(100vw - 2rem));
+    margin: 1.5rem auto 0;
+    display: grid;
+    gap: 0.9rem;
+  }
+
+  .packages-hero-frame {
+    position: relative;
+    aspect-ratio: 16 / 7;
+    overflow: hidden;
+    border-radius: 18px;
+    background: #000000;
+  }
+
+  .packages-hero-image {
+    object-fit: cover;
+    opacity: 0;
+    transition:
+      opacity 0.55s ease,
+      transform 1s ease;
+    transform: scale(1.02);
+  }
+
+  .packages-hero-image.is-visible {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  .packages-hero-overlay {
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(180deg, rgba(22, 19, 15, 0.02) 12%, rgba(22, 19, 15, 0.56) 100%),
+      linear-gradient(120deg, rgba(168, 135, 115, 0.16) 0%, rgba(168, 135, 115, 0) 52%);
+  }
+
+  .packages-hero-copy {
+    position: absolute;
+    inset: 0;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    justify-content: flex-end;
+    color: #f4ece2;
+    text-shadow: 0 8px 30px rgba(0, 0, 0, 0.6);
+  }
+
+  .packages-hero-copy h1 {
+    margin: 0;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-family: var(--font-display), "Iowan Old Style", "Palatino Linotype", Palatino,
+      "Book Antiqua", "Times New Roman", serif;
+    font-weight: 400;
+    line-height: 1.08;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #f4ece2;
+  }
+
+  .packages-hero-copy p {
+    margin: 0;
+    font-size: 1.06rem;
+    font-family: var(--font-body), "Avenir Next", Avenir, "Helvetica Neue", sans-serif;
+    font-weight: 300;
+    line-height: 1.85;
+    max-width: 40ch;
+    color: #f4ece2;
+  }
+
+  .packages-actions {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0.75rem;
+    width: 100%;
+    padding: 0.7rem;
+    background: transparent;
+    border: 0;
+  }
+
+  .packages-button {
+    width: 100%;
+    border-radius: 0.5rem;
+    border: 2.5px solid color-mix(in srgb, var(--shore-mist-300) 74%, var(--dune-200) 26%);
+    padding: 0.75rem 1rem;
+    font-family: var(--font-body), "Avenir Next", Avenir, "Helvetica Neue", sans-serif;
+    font-size: 0.8rem;
+    font-weight: 400;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    background: transparent;
+    color: var(--bg);
+    box-shadow: none;
+    min-height: 52px;
+    transition:
+      transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+      border-color 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+      color 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+      background-color 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+      box-shadow 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .packages-button:hover {
+    transform: translateY(-1px);
+    border-color: color-mix(in srgb, var(--shore-mist-300) 70%, var(--dune-200) 30%);
+    color: var(--bg);
+    background: transparent;
+    box-shadow: none;
+  }
+
+  .packages-button.active {
+    background: color-mix(in srgb, var(--shore-mist-100) 18%, transparent 82%);
+    border-color: color-mix(in srgb, var(--shore-mist-300) 60%, var(--dune-300) 40%);
+    color: var(--bg);
+    box-shadow: 0 8px 18px rgba(41, 36, 33, 0.06);
+  }
+
+  .packages-button:active {
+    transform: translateY(0);
+  }
+
+  /* Pricing details panel expands beneath the package selector. */
+  .packages-pricing-panel {
+    width: 100%;
+    display: grid;
+    grid-template-rows: 0fr;
+    transition:
+      grid-template-rows 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+      margin-top 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+    margin-top: 0;
+  }
+
+  .packages-pricing-panel.open {
+    grid-template-rows: 1fr;
+    margin-top: 0.75rem;
+  }
+
+  .packages-pricing-inner {
+    min-height: 0;
+    overflow: hidden;
+    border: 2.5px solid color-mix(in srgb, var(--dune-300) 58%, var(--shore-mist-200) 42%);
+    background: transparent;
+    border-radius: 18px;
+    padding: 1.5rem;
+    box-shadow: none;
+  }
+
+  .packages-pricing-content {
+    animation: package-panel-fade 0.42s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .packages-pricing-header {
+    margin-bottom: 1.25rem;
+  }
+
+  .packages-pricing-kicker {
+    display: inline-block;
+    margin-bottom: 0.45rem;
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-family: var(--font-body), "Avenir Next", Avenir, "Helvetica Neue", sans-serif;
+    font-weight: 400;
+    color: var(--muted);
+  }
+
+  .packages-pricing-header h2 {
+    margin: 0;
+    font-size: clamp(1.5rem, 3vw, 2.2rem);
+    font-family: var(--font-display), "Iowan Old Style", "Palatino Linotype", Palatino,
+      "Book Antiqua", "Times New Roman", serif;
+    font-weight: 400;
+    line-height: 1.14;
+    letter-spacing: 0.02em;
+    color: var(--ink);
+  }
+
+  .packages-pricing-header p {
+    margin: 0.7rem 0 0;
+    max-width: 62ch;
+    color: var(--muted);
+    font-size: 0.96rem;
+    font-family: var(--font-body), "Avenir Next", Avenir, "Helvetica Neue", sans-serif;
+    font-weight: 300;
+    line-height: 1.9;
+  }
+
+  .packages-pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+  }
+
+  .packages-pricing-card {
+    border: 2.25px solid color-mix(in srgb, var(--dune-300) 54%, var(--shore-mist-200) 46%);
+    background: transparent;
+    border-radius: 14px;
+    padding: 1rem;
+  }
+
+  .packages-pricing-label {
+    display: block;
+    margin-bottom: 0.35rem;
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-family: var(--font-body), "Avenir Next", Avenir, "Helvetica Neue", sans-serif;
+    font-weight: 400;
+    color: var(--muted);
+  }
+
+  .packages-pricing-card strong {
+    color: var(--ink);
+    font-size: 1rem;
+    font-family: var(--font-display), "Iowan Old Style", "Palatino Linotype", Palatino,
+      "Book Antiqua", "Times New Roman", serif;
+    font-weight: 400;
+    letter-spacing: 0.01em;
+  }
+
+  .packages-pricing-columns {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.75rem;
+  }
+
+  .packages-pricing-section {
+    border: 2.25px solid color-mix(in srgb, var(--dune-300) 56%, var(--shore-mist-200) 44%);
+    background: transparent;
+    border-radius: 14px;
+    padding: 1rem;
+  }
+
+  .packages-pricing-section h3 {
+    margin: 0 0 0.75rem;
+    font-size: 0.95rem;
+    font-family: var(--font-display), "Iowan Old Style", "Palatino Linotype", Palatino,
+      "Book Antiqua", "Times New Roman", serif;
+    font-weight: 400;
+    line-height: 1.18;
+    letter-spacing: 0.02em;
+    color: var(--ink);
+  }
+
+  .packages-pricing-section ul {
+    margin: 0;
+    padding-left: 1rem;
+  }
+
+  .packages-pricing-section li {
+    margin-bottom: 0.45rem;
+    color: var(--muted);
+    font-size: 0.92rem;
+    font-family: var(--font-body), "Avenir Next", Avenir, "Helvetica Neue", sans-serif;
+    font-weight: 300;
+    line-height: 1.8;
+  }
+
+  .packages-pricing-section li:last-child {
+    margin-bottom: 0;
+  }
+}
+
+@media (max-width: 820px) {
+  .packages-actions,
+  .packages-pricing-grid,
+  .packages-pricing-columns {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 720px) {
+  .packages-hero {
+    width: min(1180px, calc(100vw - 1rem));
+  }
+
+  .packages-hero-frame {
+    aspect-ratio: 4 / 3;
+  }
+
+  .packages-hero-copy {
+    padding: 1.4rem;
+  }
+
+  .packages-button {
+    text-transform: uppercase;
+  }
+
+  .packages-actions,
+  .packages-pricing-grid,
+  .packages-pricing-columns {
+    grid-template-columns: 1fr;
+  }
+
+  .packages-pricing-inner {
+    padding: 1rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  .packages-hero {
+    width: min(1280px, calc(100vw - 4rem));
+  }
+
+  .packages-hero-copy p,
+  .packages-pricing-header p {
+    max-width: 62ch;
+  }
+}
+
+@media (min-width: 1600px) {
+  .packages-hero {
+    width: min(1380px, calc(100vw - 8rem));
+  }
+}
+
+@media (max-width: 480px) {
+  .packages-pricing-kicker {
+    letter-spacing: 0.1em;
+  }
+
+  .packages-hero-copy {
+    padding: 1rem;
+  }
+}

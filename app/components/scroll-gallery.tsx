@@ -9,11 +9,16 @@ const galleryImages = [
 
 export function ScrollGallery() {
   return (
-    <section className="scroll-gallery" aria-label="Scrolling image gallery">
+    <section className="scroll-gallery" aria-label="Scrolling image gallery" data-reveal="up">
       <div className="scroll-gallery-window">
         <div className="scroll-gallery-track">
-          {galleryImages.map((image) => (
-            <figure className="scroll-gallery-item" key={image.src}>
+          {galleryImages.map((image, index) => (
+            <figure
+              className="scroll-gallery-item"
+              key={image.src}
+              data-reveal="up"
+              data-reveal-delay={String(index + 1)}
+            >
               <Image
                 src={image.src}
                 alt={image.alt}

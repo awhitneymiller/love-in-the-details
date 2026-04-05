@@ -1,0 +1,19 @@
+@layer components {
+  /* Small utility classes stay available across the app without polluting page files. */
+  .sr-anchor {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+  }
+
+  .ink {
+    color: var(--ink);
+  }
+
+  .ink-muted {
+    color: var(--muted);
+  }
+}

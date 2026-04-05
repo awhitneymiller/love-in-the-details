@@ -1,0 +1,64 @@
+@layer components {
+  /* Shared interactive elements use the same outline-button treatment. */
+  .soft-cta,
+  .send-btn,
+  .packages-button,
+  .not-found-action {
+    box-sizing: border-box;
+    font-family: inherit;
+    font-weight: 600;
+    line-height: 1.25rem;
+    text-align: center;
+    text-decoration: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    transition:
+      background-color 0.22s ease,
+      border-color 0.22s ease,
+      color 0.22s ease,
+      box-shadow 0.22s ease,
+      transform 0.22s ease;
+    background-image: none;
+  }
+
+  /* Focus states stay consistent across the site without changing the aesthetic. */
+  .site-nav-link:focus-visible,
+  .site-mobile-menu-link:focus-visible,
+  .soft-cta:focus-visible,
+  .send-btn:focus-visible,
+  .packages-button:focus-visible,
+  .not-found-action:focus-visible,
+  .site-menu-toggle:focus-visible,
+  .page-card-link:focus-visible,
+  .film-gallery-link:focus-visible,
+  .film-social-link:focus-visible,
+  .meta-v[href]:focus-visible,
+  .contact-studio-link:focus-visible {
+    outline: 2px solid color-mix(in srgb, var(--dune-500) 52%, var(--shore-mist-300) 48%);
+    outline-offset: 4px;
+  }
+
+  .send-btn:disabled {
+    opacity: 0.72;
+    cursor: progress;
+    transform: none;
+  }
+}
+
+@media (max-width: 720px) {
+  .packages-button,
+  .send-btn,
+  .soft-cta,
+  .not-found-action {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .packages-button,
+  .soft-cta,
+  .send-btn {
+    font-size: 0.7rem;
+  }
+}

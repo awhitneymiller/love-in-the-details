@@ -8,7 +8,7 @@ export default function NotFound() {
       <div className="site-shell">
         <SiteHeader />
 
-        <section className="not-found" aria-label="Page not found">
+        <section className="not-found" aria-label="Page not found" data-reveal="up">
           <div className="not-found-orbit" aria-hidden="true" />
 
           <div className="not-found-shell">

@@ -2,112 +2,50 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { SiteFooter } from '../components/site-footer';
 import { SiteHeader } from '../components/site-header';
+import {
+  fetchBloggerBlog,
+  fetchBloggerPosts,
+  formatBlogDate,
+  getBlogPostSlug,
+  getExcerpt,
+} from '../lib/blogger';
 
-const BLOG_URL = 'https://loveinthedetailsfilms.blogspot.com';
-const API_BASE = 'https://www.googleapis.com/blogger/v3';
+export const revalidate = 300;
 
-type BloggerBlog = {
-  id: string;
-  name: string;
-  description?: string;
-  url: string;
-};
-
-type BloggerPost = {
-  id: string;
-  title: string;
-  url: string;
-  published: string;
-  content?: string;
-  images?: { url: string }[];
-};
-
-const revalidate = 300;
-
-const stripHtml = (value: string) =>
-  value.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
-
-const getExcerpt = (value = '', maxLength = 160) => {
-  const cleaned = stripHtml(value);
-  if (cleaned.length <= maxLength) {
-    return cleaned;
-  }
-  return `${cleaned.slice(0, maxLength).trim()}...`;
-};
-
-const formatDate = (isoDate: string) =>
-  new Date(isoDate).toLocaleDateString('en-US', {
-    month: 'long',
-    day: 'numeric',
-    year: 'numeric',
-    timeZone: 'America/Los_Angeles',
-  });
-
-const getSlug = (url: string) => {
-  try {
-    const parsed = new URL(url);
-    const segments = parsed.pathname.split('/').filter(Boolean);
-    return segments[segments.length - 1] ?? '';
-  } catch {
-    return '';
-  }
-};
-
-async function fetchBlog() {
-  const apiKey = process.env.BLOGGER_API_KEY;
-  if (!apiKey) {
-    return null;
-  }
-  const response = await fetch(
-    `${API_BASE}/blogs/byurl?url=${encodeURIComponent(BLOG_URL)}&key=${apiKey}`,
-    { next: { revalidate } },
-  );
-  if (!response.ok) {
-    return null;
-  }
-  return (await response.json()) as BloggerBlog;
-}
-
-async function fetchPosts(blogId: string) {
-  const apiKey = process.env.BLOGGER_API_KEY;
-  if (!apiKey) {
-    return [];
-  }
-  const response = await fetch(
-    `${API_BASE}/blogs/${blogId}/posts?key=${apiKey}&fetchImages=true&maxResults=12`,
-    { next: { revalidate } },
-  );
-  if (!response.ok) {
-    return [];
-  }
-  const data = (await response.json()) as { items?: BloggerPost[] };
-  return data.items ?? [];
-}
-
-// Blog page layout wired to Blogger.
+// Journal landing page that lists recent Blogger posts.
 export default async function BlogPage() {
-  const blog = await fetchBlog();
-  const posts = blog ? await fetchPosts(blog.id) : [];
+  const blog = await fetchBloggerBlog();
+  const posts = blog ? await fetchBloggerPosts(blog.id, 12) : [];
 
   return (
     <main id="content" className="site-page">
       <div className="site-shell">
-        {/* Fixed top header */}
+        {/* Shared header. */}
         <SiteHeader />
 
-        {/* Feature card grid */}
-        <section className="card-grid">
+        {/* Recent journal entries. */}
+        <section className="card-grid" aria-label="Journal entries" data-reveal="up">
           {posts.length === 0 ? (
-            <article className="page-card">
-              <h3>Posts are loading</h3>
+            <article className="page-card" data-reveal="up" data-reveal-delay="1">
+              <h3>Journal coming soon</h3>
+              <p>Stories, frames, and wedding notes will live here soon.</p>
             </article>
           ) : (
-            posts.map((post) => {
+            posts.map((post, index) => {
               const imageUrl = post.images?.[0]?.url ?? '/images/coverphoto.jpg';
-              const slug = getSlug(post.url) || post.id;
+              const slug = getBlogPostSlug(post.url) || post.id;
               return (
-                <article className="page-card" key={post.id}>
-                  <Link href={`/blog/${slug}`} className="page-card-link">
+                <article
+                  className="page-card"
+                  key={post.id}
+                  data-reveal="up"
+                  data-reveal-delay={String((index % 3) + 1)}
+                >
+                  <Link
+                    href={`/blog/${slug}`}
+                    className="page-card-link"
+                    aria-label={`Read ${post.title}`}
+                  >
                     <div className="card-image">
                       <Image
                         src={imageUrl}
@@ -117,7 +55,7 @@ export default async function BlogPage() {
                         className="card-image-photo"
                       />
                     </div>
-                    <p className="page-card-meta">{formatDate(post.published)}</p>
+                    <p className="page-card-meta">{formatBlogDate(post.published)}</p>
                     <h3>{post.title}</h3>
                     <p>{getExcerpt(post.content)}</p>
                   </Link>
@@ -127,7 +65,7 @@ export default async function BlogPage() {
           )}
         </section>
 
-        {/* Shared footer */}
+        {/* Shared footer. */}
         <SiteFooter />
       </div>
     </main>

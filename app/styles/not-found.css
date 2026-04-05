@@ -1,0 +1,120 @@
+@layer components {
+  /* Not-found page keeps the existing orbit motif and fallback actions. */
+  .not-found {
+    position: relative;
+    padding: 4rem 1.8rem 3rem;
+    border-top: 1px solid var(--line);
+    overflow: hidden;
+    min-height: min(60vh, 34rem);
+    display: grid;
+    place-items: center;
+    text-align: center;
+  }
+
+  .not-found-orbit {
+    position: absolute;
+    width: clamp(220px, 38vw, 400px);
+    aspect-ratio: 1 / 1;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(186, 159, 141, 0.24) 0%, rgba(186, 159, 141, 0) 64%);
+    top: -8rem;
+    right: -3rem;
+    animation: not-found-orbit 26s linear infinite;
+  }
+
+  .not-found-shell {
+    position: relative;
+    z-index: 2;
+    max-width: 48ch;
+    background: rgba(248, 245, 236, 0.9);
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    padding: 1.7rem;
+    box-shadow: 0 22px 50px rgba(21, 30, 29, 0.14);
+    backdrop-filter: blur(4px);
+    animation: not-found-fade 0.9s cubic-bezier(0.25, 1, 0.5, 1);
+  }
+
+  .not-found-kicker {
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: color-mix(in srgb, var(--dune-500) 72%, var(--rose-cloud-500) 28%);
+    font-size: 0.72rem;
+  }
+
+  .not-found-title {
+    margin: 0.4rem 0 0.8rem;
+    color: var(--accent-deep);
+    font-weight: 500;
+    line-height: 1;
+    font-size: clamp(2rem, 5vw, 2.85rem);
+  }
+
+  .not-found-copy {
+    margin: 0 auto;
+    color: var(--muted);
+    line-height: 1.75;
+    max-width: 44ch;
+    font-size: 0.84rem;
+  }
+
+  .not-found-actions {
+    margin-top: 1.15rem;
+    display: flex;
+    justify-content: center;
+    gap: 0.7rem;
+    flex-wrap: wrap;
+  }
+
+  .not-found-action {
+    border: 1.5px solid color-mix(in srgb, var(--shore-mist-300) 74%, var(--dune-200) 26%);
+    border-radius: 0.5rem;
+    padding: 0.75rem 1rem;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    background: transparent;
+    color: var(--bg);
+    box-shadow: none;
+  }
+
+  .not-found-action:hover {
+    transform: translateY(-1px);
+    background: transparent;
+  }
+
+  .not-found-action-primary {
+    background: transparent;
+    color: var(--bg);
+    border-color: color-mix(in srgb, var(--shore-mist-300) 64%, var(--dune-200) 36%);
+  }
+
+  .not-found-code {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    margin: 0;
+    bottom: 0.75rem;
+    z-index: 1;
+    color: rgba(64, 89, 88, 0.12);
+    font-size: clamp(2.6rem, 10vw, 5.1rem);
+    font-weight: 600;
+    letter-spacing: 0.04em;
+  }
+}
+
+@media (max-width: 720px) {
+  .not-found {
+    padding: 3.2rem 0.9rem 2.6rem;
+    min-height: min(62vh, 28rem);
+  }
+
+  .not-found-shell {
+    padding: 1.4rem;
+  }
+
+  .not-found-title {
+    font-size: clamp(1.7rem, 7vw, 2.2rem);
+  }
+}

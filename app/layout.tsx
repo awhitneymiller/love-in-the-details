@@ -1,5 +1,33 @@
 import type { Metadata, Viewport } from 'next';
-import './globals.css';
+import { Cormorant_Garamond, Raleway } from 'next/font/google';
+import './styles/base.css';
+import './styles/layout.css';
+import './styles/components.css';
+import './styles/home.css';
+import './styles/contact.css';
+import './styles/content.css';
+import './styles/packages.css';
+import './styles/film.css';
+import './styles/not-found.css';
+import './styles/utilities.css';
+import './styles/animations.css';
+import { ScrollReveal } from './components/scroll-reveal';
+import { SiteParallax } from './components/site-parallax';
+
+// Editorial display font for titles and refined serif accents.
+const cormorantGaramond = Cormorant_Garamond({
+  subsets: ['latin'],
+  variable: '--font-display',
+  weight: ['300', '400', '500', '600'],
+  style: ['normal', 'italic'],
+});
+
+// Clean sans-serif body font for navigation, copy, and interface text.
+const raleway = Raleway({
+  subsets: ['latin'],
+  variable: '--font-body',
+  weight: ['300', '400', '500', '600'],
+});
 
 // Global metadata used by all routes.
 export const metadata: Metadata = {
@@ -14,35 +42,27 @@ export const viewport: Viewport = {
   themeColor: '#2c1c12',
 };
 
-// Root layout wrapper for all app pages.
+// Root layout that mounts the shared background and route content.
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en-US">
+    <html lang="en-US" className={`${cormorantGaramond.variable} ${raleway.variable}`}>
       <body>
-        {/* Keyboard-accessible skip link */}
-        <a
-          href="#content"
-          className={[
-            'sr-only focus:not-sr-only',
-            'fixed left-4 top-4 z-50',
-            'rounded-none',
-            'bg-white',
-            'px-3 py-2 text-[12px]',
-            'shadow-[0_18px_40px_rgba(0,0,0,0.18)]',
-            'focus-visible:outline-none focus-visible:ring-2',
-            'focus-visible:ring-[#2c1c12]/40',
-            'focus-visible:ring-offset-2 focus-visible:ring-offset-white',
-          ].join(' ')}
-        >
-          Skip to content
-        </a>
+        <SiteParallax />
+        <ScrollReveal />
 
-        {/* Route content */}
-        {children}
+        <div className="site-app">
+          {/* Skip link keeps keyboard users anchored to the main content. */}
+          <a href="#content" className="skip-link">
+            Skip to content
+          </a>
+
+          {/* Route content */}
+          {children}
+        </div>
       </body>
     </html>
   );
