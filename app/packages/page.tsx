@@ -43,7 +43,7 @@ const packageDetails: PackageItem[] = [
   {
     id: 'doc',
     label: 'Documentary',
-    image: 'DOC.jpg',
+    image: 'docring.jpg',
     title: 'Documentary Wedding Film',
     description:
       'We offer a documentary approach to wedding films that follow the natural emotional arc of your day from anticipation, to commitment, to celebration. We shape your wedding into an honest, cinematic story that captures, not just the highlights, but also the behind-the-scenes of the day and interviews.',

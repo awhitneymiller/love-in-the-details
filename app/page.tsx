@@ -14,7 +14,7 @@ export default function HomePage() {
         {/* Website trailer. */}
         <section className="website-trailer" data-reveal="soft">
           <video
-            src="/images/websitetrailer.mov"
+            src="/images/wideaf.mov"
             poster="/images/videoframe_0.png"
             autoPlay
             muted
